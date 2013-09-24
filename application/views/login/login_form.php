@@ -34,9 +34,10 @@
 	<div class="control-group">		
 		<div class="controls">
 			<?php
-			echo form_submit(array(
+			echo form_button(array(
 				'class' => 'btn btn-primary',
-				'value' => 'Login')
+				'type' => 'submit',
+				'content' => 'Login')
 			);
 			?>
 		</div>

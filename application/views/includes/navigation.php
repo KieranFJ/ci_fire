@@ -25,7 +25,7 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                       <li><a href="item.php">Item</a></li>
                       <li><a href="itemCategories.php">Item Categories</a></li>
-                      <li><a href="level.php">Bag Level</a></li>
+                      <li><?php echo anchor('add_update/bag_level', 'Bag Level')?></li>
                       <li><a href="station.php">Station</a></li>
                   </ul>                  
               </li>
@@ -36,7 +36,7 @@
                     <li><a href="destroy.php">Destroy Item</a></li>   
                   </ul>                
               </li>
-              <li><a href="logout">Logout</a></li>
+              <li><?php echo anchor('login/logout', 'Logout')?></li>
               <li><a href="#helpModal" data-toggle="modal">Help</a></li>
             </ul>
           </div><!--/.nav-collapse -->

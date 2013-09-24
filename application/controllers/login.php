@@ -3,7 +3,9 @@
 class Login extends CI_Controller {
     
     function index() {
+	$this->load->library('form_validation');
 
+	$this->form_validation->set_rules('username');
         $this->load->view('includes/header');
         $this->load->view('includes/navigation');
         $this->load->view('login/login_form');
@@ -12,7 +14,7 @@ class Login extends CI_Controller {
 
     function logout() {        
         $this->session->sess_destroy();
-        redirect('index');
+        redirect('login');
     }
     
     function validate_credentials() {
@@ -33,7 +35,7 @@ class Login extends CI_Controller {
             redirect('main');
         }
         else {
-            redirect('main');        
+            redirect('login/index', 'refresh');        
         }
     }
     
