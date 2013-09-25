@@ -1,5 +1,4 @@
-<div class="container"> 
-	<?php echo $data ?>
+<div class="container"> 	
     <h1>Bag Level</h1>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#update" data-toggle="tab">Update</a></li>
@@ -12,9 +11,9 @@
                 <label>Select Bag Level</label>
                 <select id="target" data-target="upForm" class="get" name="levelSelect">
                     <?php
-                    foreach($result as $row)
+                    foreach($bag_levels as $row)
                     {?>
-                        <option><?php echo $row['Level'] ?></option>
+                        <option><?php echo $row->Level_Name ?></option>
                     <?php
                     }
                     ?>
@@ -32,17 +31,50 @@
             </div>
             </form>                
         </div>
-        <div class="tab-pane" id="addNew">                
-            <form class="validate" action="php/level/add_level.php" id="form2">
+        <div class="tab-pane" id="addNew">        
+            <?php 
+            
+            echo form_open('add_update/add_level');
+            
+            ?>
             <h2>New Level</h2> 
             <div class="row">                         
                 <div class="span3">                          
-                <label>Level</label>
-                <input class="required" maxlength="10" minlength="1" type="text" name="level" placeholder="Level">
+                <label>Level Name</label>
+                <?php 
+                
+                echo form_input(array(
+                    'class' => 'required',
+                    'name' => 'levelName',
+                    'type' => 'text',
+                    'maxlength' => '10',
+                    'minlength' => '1',
+                    'placeholder' => 'Level name')
+                );
+                ?>
                 <label>Number of Items</label>
-                <input class="required digits" maxlength="5" minlength="1" type="text" name="noItems" placeholder="Number of items to contained">
+                <?php 
+                
+                echo form_input(array(
+                    'class' => 'required digits',
+                    'name' => 'noItems',
+                    'placeholder' => 'Number of items contained',
+                    'maxlength' => 5,
+                    'minlength' => 1,
+                    'type' => 'text')                    
+                );
+                
+                ?>
                 <label>Description</label>
-                <textarea class="required" name="description"  rows="3" placeholder="Description of level type"></textarea>  
+                <?php 
+                
+                echo form_textarea(array(
+                   'class' => 'required',
+                    'name' => 'description',
+                    'rows' => 3,
+                    'placeholder' => 'Description of level type')
+                );
+                ?>
                 </div>
                 <div class="span2">
                     <div class="message">
@@ -51,9 +83,19 @@
 
             </div>
             <div class="form-actions">
-                <button id="inFormSub" type="submit" class="btn btn-large btn-primary">Submit</button>
-            </div>
-            </form>                   
+                <?php 
+                echo form_button(array(
+                   'class' => 'btn btn-primary',
+                    'type' => 'submit',
+                    'content' => 'Submit')
+                );
+                ?>
+            </div>            
+            <?php 
+            
+            echo form_close();
+            
+            ?>
         </div>
     </div>
 </div>
