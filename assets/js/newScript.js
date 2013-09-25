@@ -1,7 +1,31 @@
-<?php
+//$(document).ready(function() {
+//    $('form').validate();
+//    
+//    $('form').submit(function(e) {
+//       e.preventDefault();
+//       
+//       var id = $(this).attr('id'),
+//           action = $(this).attr('action');
+//           
+//       if($('#'+id).valid()) {
+//           $('#'+id).find('div.message').load(action, $('#'+id).serializeArray());
+//       }
+//    });
+//});
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+$(document).ready(function(){
+   
+    $(".form").validate();
+    
+    
+});
+
+$(".form").submit(function(e){  
+        e.preventDefault();
+        var id=$(this).attr('id'),
+            action=$(this).attr('action');
+        
+        if($("#"+id).valid()){
+            $('#'+id).find('div.message').load(action, $('#'+id).serializeArray());            
+        }    
+    });

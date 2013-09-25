@@ -34,7 +34,9 @@
         <div class="tab-pane" id="addNew">        
             <?php 
             
-            echo form_open('add_update/add_level');
+            echo form_open('add_update/add_level', array(
+                'class' => 'form'
+            ));
             
             ?>
             <h2>New Level</h2> 
@@ -86,8 +88,8 @@
                 <?php 
                 echo form_button(array(
                    'class' => 'btn btn-primary',
-                    'type' => 'submit',
-                    'content' => 'Submit')
+                   'type' => 'submit',
+                   'content' => 'Submit')
                 );
                 ?>
             </div>            
