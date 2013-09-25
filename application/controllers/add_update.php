@@ -34,7 +34,10 @@ class Add_Update extends MY_Controller {
         
         if($data['return'] === TRUE)
         {
-            redirect('add_update/bag_level');
+            //reload page with alert box
+            $message = array('message' => "Entry created",
+                    'type' => 1);
+            $this->load->view('alert', $message);            
         } else {
             redirect('main');
         }
