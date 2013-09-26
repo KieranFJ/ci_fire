@@ -35,7 +35,7 @@
             <?php 
             
             echo form_open('add_update/add_level', array(
-                'class' => 'form'
+                'id' => 'form'
             ));
             
             ?>
@@ -79,7 +79,7 @@
                 ?>
                 </div>
                 <div class="span2">
-                    <div class="message">
+                    <div id="message">
                     </div>
                 </div>
 
@@ -87,8 +87,9 @@
             <div class="form-actions">
                 <?php 
                 echo form_button(array(
+                   'id' => 'submit', 
                    'class' => 'btn btn-primary',
-                   'type' => 'submit',
+                   
                    'content' => 'Submit')
                 );
                 ?>

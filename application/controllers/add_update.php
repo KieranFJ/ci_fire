@@ -35,11 +35,17 @@ class Add_Update extends MY_Controller {
         if($data['return'] === TRUE)
         {
             //reload page with alert box
-            $message = array('message' => "Entry created",
+            $message = array(
+                    'message' => "Entry created",
                     'type' => 1);
-            $this->load->view('alert', $message);            
+            $data = $this->load->view('alert', $message, TRUE);            
         } else {
-            redirect('main');
+            $message = array(
+                'message' => "Duplicate Entry, check your Level Name",
+                'type' => 0);
+            $data = $this->load->view('alert', $message, TRUE);
         }
+        
+        $this->output->set_output($data);
     }
 }
