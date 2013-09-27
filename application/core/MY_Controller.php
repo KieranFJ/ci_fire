@@ -27,8 +27,9 @@ class MY_Controller extends CI_Controller {
         $this->load->view('includes/footer');
     }
     
-    function create_alert() 
+    function create_alert($message) 
     {
-        
+        $data = $this->load->view('alert', $message, TRUE);
+        $this->output->set_output($data);
     }
 }

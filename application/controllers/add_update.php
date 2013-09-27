@@ -39,23 +39,8 @@ class Add_Update extends MY_Controller {
         $this->load->model('add_update_model');
         
         $data['return'] = $this->add_update_model->add_bag_level(); 
-        
-        //seperate the alert message stuff to MY_Controller/orgin_model
-        if($data['return'] === TRUE) 
-        {
-            //reload page with alert box
-            $message = array(
-                    'message' => "Entry created",
-                    'type' => 1);
-            $data = $this->load->view('alert', $message, TRUE);            
-        } else {
-            $message = array(
-                'message' => "Duplicate Entry, check your Level Name",
-                'type' => 0);
-            $data = $this->load->view('alert', $message, TRUE);
-        }
-        
-        $this->output->set_output($data);
+
+        $this->create_alert($data['return']);
     }
     
     function update_level() 
@@ -64,18 +49,8 @@ class Add_Update extends MY_Controller {
         
         $data['return'] = $this->add_update_model->update_bag_level();
         
-        if($data['return'] === TRUE) {
-            $message = array(
-                'message' => 'Entry updated',
-                'type' => 1);
-            $data = $this->load->view('alert', $message, TRUE);
-        } else {
-            $message = array(
-                'message' => 'Entry error',
-                'type' => 0);
-            $data = $this->load->view('alert', $message, TRUE);
-        }
-        $this->output->set_output($data);    
+        $this->create_alert($data['return']);
+        //$this->output->set_output($data);    
     }
         
     function load_form() 

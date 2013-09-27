@@ -32,9 +32,13 @@ class add_update_model extends CI_Model
         if($query->num_rows == 0) 
         {
             $this->db->insert('bag_level', $data);            
-            return TRUE;
+            return $message = array(
+                    'message' => "Entry created",
+                    'type' => 1);
         } else {
-            return FALSE;
+            return $message = array(
+                'message' => "Duplicate Entry, check your Level Name",
+                'type' => 0);
         }
     }
     
@@ -50,7 +54,17 @@ class add_update_model extends CI_Model
         $this->db->where('Level_ID', $data['Level_ID']);
         $query = $this->db->update('bag_level', $data);
         
-        return $query;        
+        if($query === TRUE) 
+        {
+            $message = array(
+                'message' => 'Entry updated',
+                'type' => 1);
+        } else {
+            $message = array(
+                'message' => 'Entry error',
+                'type' => 0);
+        }
+        return $message;     
     }
     
     function get_bag_level_form() 
