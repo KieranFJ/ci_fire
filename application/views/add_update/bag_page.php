@@ -5,38 +5,59 @@
         <li class><a href="#addNew" data-toggle="tab">Add New</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane active" id="update">                
-            <form action="php/level/get_level.php" method="post">
-                <h2>Update Level</h2>
-                <label>Select Bag Level</label>
-                <select id="target" data-target="upForm" class="get" name="levelSelect">
-                    <?php
-                    foreach($bag_levels as $row)
-                    {?>
-                        <option><?php echo $row->Level_Name ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-            </form>
-            <form class="validate" action="php/level/update_level.php" method="post" id="form1">
+        <div class="tab-pane active" id="update">    
+            <?php 
+            
+            echo form_open('add_update/load_form','', array(
+                'origin' => 'get_bag_level_form'
+            ));                     
+            
+            ?>            
+            <h2>Update Level</h2>
+            <label>Select Bag Level</label>
+
+            <?php 
+            
+            foreach($bag_levels as $row) {
+                $bag_key[] = $row;
+                $bag_value[] = $row;                
+            }
+            
+            $bag_out = array_combine($bag_key, $bag_value);
+
+            echo form_dropdown('levelSelect', $bag_out, '', 'id="load_form"');
+            
+            echo form_close();
+            
+            echo form_open('add_update/update_level', array('class' => 'form'));
+            
+            ?>            
             <div class="row">                    
                 <div id="upForm" class="span4">
                 </div>
-                <div class="span2 message">
+                <div id="message" class="span2 message">
                 </div>
             </div>
             <div class="form-actions">
-                <button class="btn btn-primary btn-large">Update Entry</button>
-            </div>
-            </form>                
+                <?php 
+                echo form_button(array(
+                   'type' => 'submit', 
+                   'class' => 'btn btn-primary',                   
+                   'content' => 'Submit')
+                );
+                ?>
+            </div>  
+            
+            <?php 
+            
+            echo form_close();
+            
+            ?>
         </div>
         <div class="tab-pane" id="addNew">        
             <?php 
             
-            echo form_open('add_update/add_level', array(
-                'id' => 'form'
-            ));
+            echo form_open('add_update/add_level', array('class' => 'form'));
             
             ?>
             <h2>New Level</h2> 
@@ -87,9 +108,8 @@
             <div class="form-actions">
                 <?php 
                 echo form_button(array(
-                   'id' => 'submit', 
-                   'class' => 'btn btn-primary',
-                   
+                   'type' => 'submit',
+                   'class' => 'btn btn-primary',                   
                    'content' => 'Submit')
                 );
                 ?>

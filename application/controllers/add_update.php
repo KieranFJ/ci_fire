@@ -1,16 +1,24 @@
-<?php
-
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Add_Update extends MY_Controller {
 
     function bag_level() 
     {
-
+        $data['bag_levels'] = array();
+        
         $this->load->model('add_update_model');	
-        $data['bag_levels'] = $this->add_update_model->get_bag_levels();
-
-        if($data) 
+        $results = $this->add_update_model->get_bag_levels();
+        
+        if($results !== FALSE) 
         {
+            foreach($results as $row) 
+            {
+                $data['bag_levels'][] = $row->Level_Name;
+            }
+        } 
+        
+        if($data) 
+        {            
             //if levels exists load page with data
             $this->load->view('includes/header');
             $this->load->view('includes/navigation');
@@ -32,7 +40,8 @@ class Add_Update extends MY_Controller {
         
         $data['return'] = $this->add_update_model->add_bag_level(); 
         
-        if($data['return'] === TRUE)
+        //seperate the alert message stuff to MY_Controller/orgin_model
+        if($data['return'] === TRUE) 
         {
             //reload page with alert box
             $message = array(
@@ -47,5 +56,37 @@ class Add_Update extends MY_Controller {
         }
         
         $this->output->set_output($data);
+    }
+    
+    function update_level() 
+    {
+        $this->load->model('add_update_model');
+        
+        $data['return'] = $this->add_update_model->update_bag_level();
+        
+        if($data['return'] === TRUE) {
+            $message = array(
+                'message' => 'Entry updated',
+                'type' => 1);
+            $data = $this->load->view('alert', $message, TRUE);
+        } else {
+            $message = array(
+                'message' => 'Entry error',
+                'type' => 0);
+            $data = $this->load->view('alert', $message, TRUE);
+        }
+        $this->output->set_output($data);    
+    }
+        
+    function load_form() 
+    {
+        $this->load->model('add_update_model');
+        switch($this->input->post('origin')) 
+        {
+            case 'get_bag_level_form':  
+                    $results['out'] = $this->add_update_model->get_bag_level_form();
+                    $this->load->view('add_update/update_bag_form', $results);
+                    break;
+        }        
     }
 }

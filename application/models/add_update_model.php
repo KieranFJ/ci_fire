@@ -1,37 +1,63 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class add_update_model extends CI_Model {
+class add_update_model extends CI_Model 
+{
 	
-    function get_bag_levels() {
+    function get_bag_levels() 
+    {
         $this->db->select('Level_Name');
         $query = $this->db->get('bag_level');
-
-        return $query->result(); 				
+        
+        if ($query->num_rows == 0) 
+        {
+            return FALSE;
+        } else {
+            return $query->result(); 
+        }        				
     } 
 
-    function add_bag_level() {
+    function add_bag_level() 
+    {
         
         $data = array(
           'Level_Name' => $this->input->post('levelName'),
           'Level_No_Items' => $this->input->post('noItems'),
           'Level_Desc' => $this->input->post('description')
         );
-        
-        //check if entries already exists
-        //true return error
-        //false insert data
-        
+                
         $this->db->select('Level_Name');
         $this->db->where('Level_Name', $data['Level_Name']);
         $query = $this->db->get('bag_level');
         
-        if($query->num_rows == 0)
+        if($query->num_rows == 0) 
         {
-            $this->db->insert('bag_level', $data);
-            
+            $this->db->insert('bag_level', $data);            
             return TRUE;
         } else {
             return FALSE;
         }
+    }
+    
+    function update_bag_level() 
+    {
+        $data = array(
+            'Level_ID' => $this->input->post('levelID'),
+            'Level_Name' => $this->input->post('levelName'),
+            'Level_No_Items' => $this->input->post('noItems'),
+            'Level_Desc' => $this->input->post('description')
+        );
+        
+        $this->db->where('Level_ID', $data['Level_ID']);
+        $query = $this->db->update('bag_level', $data);
+        
+        return $query;        
+    }
+    
+    function get_bag_level_form() 
+    {
+        $this->db->where('Level_Name', $this->input->post('levelSelect'));
+        $query = $this->db->get('bag_level');
+        
+        return $query->row();
     }
 }
