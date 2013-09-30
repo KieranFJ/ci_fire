@@ -9,6 +9,7 @@ class Add_Update extends MY_Controller {
         $this->load->model('add_update_model');	
         $results = $this->add_update_model->get_bag_levels();
         
+        //maybe move this to a library function?
         if($results !== FALSE) 
         {
             foreach($results as $row) 
@@ -19,17 +20,9 @@ class Add_Update extends MY_Controller {
         
         if($data) 
         {            
-            //if levels exists load page with data
-            $this->load->view('includes/header');
-            $this->load->view('includes/navigation');
-            $this->load->view('add_update/bag_page', $data);
-            $this->load->view('includes/footer');	
-        } else {
-            //if no levels load page blank update
-            $this->load->view('includes/header');
-            $this->load->view('includes/navigation');
-            $this->load->view('add_update/bag_page');
-            $this->load->view('includes/footer');	
+            $this->load_views('add_update/bag_page', $data);
+        } else {            
+            $this->load_views('add_update/bag_page');	
         }
     }
     
@@ -63,5 +56,31 @@ class Add_Update extends MY_Controller {
                     $this->load->view('add_update/update_bag_form', $results);
                     break;
         }        
+    }
+    
+    function station() 
+    {
+        $data['stations'] = array();
+        $this->load->model('add_update_model');
+        
+        $results = $this->add_update_model->get_stations();
+        
+        if($results !== FALSE) 
+        {
+            foreach($results as $row) 
+            {
+                $data['stations'][] = $row->Station_Name;
+            }
+        } 
+        
+        
+        if($data) 
+        {            
+            $this->load_views('stub', $data);
+        } else {            
+            $this->load_views('stub');	
+        }
+        
+        
     }
 }

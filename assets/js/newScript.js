@@ -7,7 +7,8 @@ $(document).ready(function(){
         var url = $(this).attr('action'),
             data = $(this).serialize();
             
-            console.log(data);
+        var id = $(this).find('.message').attr('id');
+        
         if($(this).valid())
         {
             $.ajax({
@@ -16,7 +17,7 @@ $(document).ready(function(){
                data: $(this).serialize(),
                success: function(data)
                {
-                   $('#message').html(data);
+                   $('#'+id).html(data);
                }
             });
             return false;
@@ -32,4 +33,6 @@ $(document).ready(function(){
         //load() assumes GET unless data passed is an object
         $('#upForm').load(url, data)
     });    
+    
+    $('#load_form').trigger('change');
 });

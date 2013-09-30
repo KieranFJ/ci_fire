@@ -27,6 +27,25 @@ class MY_Controller extends CI_Controller {
         $this->load->view('includes/footer');
     }
     
+
+    function load_views()
+    {
+        $this->load->view('includes/header');
+        $this->load->view('includes/navigation');
+        $args = func_get_args();
+        
+        //psudo overloading due to lack of php overloading
+        if (count($args) == 1) {
+            $this->load->view($args[0]);
+        } else {
+            $this->load->view($args[0], $args[1]);
+        }        
+        //$this->load->view($content, $data);
+        $this->load->view('includes/footer');
+    }
+    
+
+    
     function create_alert($message) 
     {
         $data = $this->load->view('alert', $message, TRUE);

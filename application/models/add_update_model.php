@@ -64,7 +64,7 @@ class add_update_model extends CI_Model
                 'message' => 'Entry error',
                 'type' => 0);
         }
-        return $message;     
+        return $message;
     }
     
     function get_bag_level_form() 
@@ -73,5 +73,18 @@ class add_update_model extends CI_Model
         $query = $this->db->get('bag_level');
         
         return $query->row();
+    }
+    
+    function get_stations() 
+    {
+        $this->db->select('Station_Name');
+        $query = $this->db->get('stations');
+        
+        if($query->num_rows == 0) 
+        {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
     }
 }

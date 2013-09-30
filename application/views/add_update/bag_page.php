@@ -35,7 +35,7 @@
             <div class="row">                    
                 <div id="upForm" class="span4">
                 </div>
-                <div id="message" class="span2 message">
+                <div id="message1" class="span2 message">
                 </div>
             </div>
             <div class="form-actions">
@@ -100,7 +100,7 @@
                 ?>
                 </div>
                 <div class="span2">
-                    <div id="message">
+                    <div id="message2" class="message">
                     </div>
                 </div>
 
