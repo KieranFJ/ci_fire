@@ -19,15 +19,6 @@ class MY_Controller extends CI_Controller {
     	}
     }
 
-    function index() 
-    {
-    	$this->load->view('includes/header');
-        $this->load->view('includes/navigation');
-        $this->load->view('main/main_page');
-        $this->load->view('includes/footer');
-    }
-    
-
     function load_views()
     {
         $this->load->view('includes/header');

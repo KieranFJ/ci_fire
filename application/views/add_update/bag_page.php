@@ -17,15 +17,20 @@
             <label>Select Bag Level</label>
 
             <?php 
+            if(isset($bag_levels)) {
+                foreach($bag_levels as $row) {
+                    $key[] = $row;
+                    $value[] = $row;                
+                }
+                
+                $out = array_combine($key, $value);
+
+                echo form_dropdown('levelSelect', $out, '', 'id="load_form"');
             
-            foreach($bag_levels as $row) {
-                $bag_key[] = $row;
-                $bag_value[] = $row;                
+            } else {
+                echo form_dropdown();
             }
             
-            $bag_out = array_combine($bag_key, $bag_value);
-
-            echo form_dropdown('levelSelect', $bag_out, '', 'id="load_form"');
             
             echo form_close();
             

@@ -1,10 +1,3 @@
-
-<?php 
-
-echo form_hidden('levelID', $out->Level_ID);
-
-
-?>
 <label>Bag Level</label>
 <input type="text" class="required" minlength="1" name="levelName" value="<?php echo $out->Level_Name ?>"></input>
 <label>Number of Items</label>

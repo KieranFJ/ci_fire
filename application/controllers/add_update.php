@@ -18,7 +18,7 @@ class Add_Update extends MY_Controller {
             }
         } 
         
-        if($data) 
+        if($data['bag_levels']) 
         {            
             $this->load_views('add_update/bag_page', $data);
         } else {            
@@ -55,12 +55,16 @@ class Add_Update extends MY_Controller {
                     $results['out'] = $this->add_update_model->get_bag_level_form();
                     $this->load->view('add_update/update_bag_form', $results);
                     break;
+            case 'get_station_details_form':
+                    $results['out'] = $this->add_update_model->get_station_form();
+                    $this->load->view('add_update/update_station_form', $results);
+                    break;
         }        
     }
     
     function station() 
     {
-        $data['stations'] = array();
+        $data['station_names'] = array();
         $this->load->model('add_update_model');
         
         $results = $this->add_update_model->get_stations();
@@ -69,18 +73,34 @@ class Add_Update extends MY_Controller {
         {
             foreach($results as $row) 
             {
-                $data['stations'][] = $row->Station_Name;
+                $data['station_names'][] = $row->Station_Name;
             }
         } 
         
-        
-        if($data) 
+        if($data['station_names']) 
         {            
-            $this->load_views('stub', $data);
+            $this->load_views('add_update/station_page', $data);
         } else {            
-            $this->load_views('stub');	
-        }
-        
-        
+            $this->load_views('add_update/station_page');	
+        }        
     }
+    
+    function add_station() 
+    {
+        $this->load->model('add_update_model');
+        
+        $data['return'] = $this->add_update_model->add_station(); 
+
+        $this->create_alert($data['return']);
+    }
+    
+    function update_station() 
+    {
+        $this->load->model('add_update_model');
+        
+        $data['return'] = $this->add_update_model->update_station();
+        
+        $this->create_alert($data['return']);
+    }
+    
 }
