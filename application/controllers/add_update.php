@@ -130,11 +130,19 @@ class Add_Update extends MY_Controller {
     
     function add_category()
     {
-        $this->load->view('stub');
+        $this->load->model('add_update_model');
+        
+        $data['return'] = $this->add_update_model->add_category(); 
+
+        $this->create_alert($data['return']);
     }
     
     function update_category()
     {
-        $this->load->view('stub');
+        $this->load->model('add_update_model');
+        
+        $data['return'] = $this->add_update_model->update_category();
+        
+        $this->create_alert($data['return']);
     }    
 }

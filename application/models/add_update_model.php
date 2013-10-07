@@ -119,7 +119,7 @@ class add_update_model extends CI_Model
                     'type' => 1);
         } else {
             return $message = array(
-                'message' => "Duplicate Entry, check your Level Name",
+                'message' => "Duplicate Entry, check your Station Name",
                 'type' => 0);
         }
     }
@@ -163,5 +163,68 @@ class add_update_model extends CI_Model
         } else {
             return $query->result();
         }
+    }
+    
+    function get_category_form()
+    {
+        $this->db->where('Category_Name', $this->input->post('categoryName'));
+        $query = $this->db->get('categories');
+        
+        return $query->row();
+    }
+    
+    function add_category() 
+    {
+        $data = array(
+            'Category_Name' => $this->input->post('categoryName'),
+            'Category_Description' => $this->input->post('categoryDescription'),
+            'Category_Model' => $this->input->post('categoryModel'),
+            'Category_Manufacturer' => $this->input->post('categoryManufacturer'),
+            'Category_Contact_No' => $this->input->post('categoryContactNo'),
+            'Category_Address' => $this->input->post('categoryAddress')          
+        );
+                
+        $this->db->select('Category_Name');
+        $this->db->where('Category_Name', $data['Category_Name']);
+        $query = $this->db->get('categories');
+        
+        if($query->num_rows == 0) 
+        {
+            $this->db->insert('categories', $data);            
+            return $message = array(
+                    'message' => "Entry created",
+                    'type' => 1);
+        } else {
+            return $message = array(
+                'message' => "Duplicate Entry, check your Category Name",
+                'type' => 0);
+        }
+    }
+    
+    function update_category() 
+    {
+        $data = array(
+            'Category_Name' => $this->input->post('categoryName'),
+            'Category_Description' => $this->input->post('categoryDescription'),
+            'Category_Model' => $this->input->post('categoryModel'),
+            'Category_Manufacturer' => $this->input->post('categoryManufacturer'),
+            'Category_Contact_No' => $this->input->post('categoryContactNo'),
+            'Category_Address' => $this->input->post('categoryAddress')          
+        );
+        
+        $this->db->where('Category_Name', $data['Category_Name']);
+        $query = $this->db->update('categories', $data);
+        
+        if($query === TRUE) 
+        {
+            $message = array(
+                'message' => 'Entry updated',
+                'type' => 1);
+        } else {
+            $message = array(
+                'message' => 'Entry error',
+                'type' => 0);
+        }
+        return $message;
     }
 }
