@@ -28,7 +28,6 @@ class Add_Update extends MY_Controller {
     
     function add_level()
     {
-        //send post to load add level model
         $this->load->model('add_update_model');
         
         $data['return'] = $this->add_update_model->add_bag_level(); 
@@ -43,7 +42,6 @@ class Add_Update extends MY_Controller {
         $data['return'] = $this->add_update_model->update_bag_level();
         
         $this->create_alert($data['return']);
-        //$this->output->set_output($data);    
     }
         
     function load_form() 
@@ -58,6 +56,10 @@ class Add_Update extends MY_Controller {
             case 'get_station_details_form':
                     $results['out'] = $this->add_update_model->get_station_form();
                     $this->load->view('add_update/update_station_form', $results);
+                    break;
+            case 'get_category_details_form':
+                    $results['out'] = $this->add_update_model->get_category_form();
+                    $this->load->view('add_update/update_category_form', $results);
                     break;
         }        
     }
@@ -103,4 +105,36 @@ class Add_Update extends MY_Controller {
         $this->create_alert($data['return']);
     }
     
+    function category()
+    {
+        $data['category_names'] = array();
+        $this->load->model('add_update_model');
+        
+        $results = $this->add_update_model->get_categories();
+        
+        if($results !== FALSE) 
+        {
+            foreach($results as $row) 
+            {
+                $data['category_names'][] = $row->Category_Name;
+            }
+        } 
+        
+        if($data['category_names']) 
+        {            
+            $this->load_views('add_update/category_page', $data);
+        } else {            
+            $this->load_views('add_update/category_page');	
+        }
+    }
+    
+    function add_category()
+    {
+        $this->load->view('stub');
+    }
+    
+    function update_category()
+    {
+        $this->load->view('stub');
+    }    
 }

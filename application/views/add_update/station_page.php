@@ -1,6 +1,5 @@
 <div class="container">
-    <h1>Stations</h1>
-    
+    <h1>Stations</h1>    
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#update" data-toggle="tab">Update</a></li>
         <li class><a href="#addNew" data-toggle="tab">Add New</a></li>
@@ -17,8 +16,8 @@
             
             if(isset($station_names)) {
                 foreach($station_names as $row) {
-                $key[] = $row;
-                $value[] = $row;
+                    $key[] = $row;
+                    $value[] = $row;
                 }
                 
                 $out = array_combine($key, $value);
@@ -31,9 +30,7 @@
             echo form_close();
             
             echo form_open('add_update/update_station', array('class' => 'form'));
-            ?>                
-            
-            <form class="validate form" action="add_update/update_station" method="post">                
+            ?>                                           
             <div class="row">
                 <div id="upForm">
                 </div>  

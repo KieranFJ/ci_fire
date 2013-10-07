@@ -24,7 +24,7 @@
                   <a id="drop2" role="button "class="dropdown-toggle" data-toggle="dropdown" href="#">Add/Update</a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                       <li><a href="item.php">Item</a></li>
-                      <li><a href="itemCategories.php">Item Categories</a></li>
+                      <li><?php echo anchor('add_update/category', 'Item Categories'); ?></li>
                       <li><?php echo anchor('add_update/bag_level', 'Bag Level'); ?></li>
                       <li><?php echo anchor('add_update/station', 'Station'); ?></li>
                   </ul>                  

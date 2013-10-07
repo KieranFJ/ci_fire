@@ -151,4 +151,17 @@ class add_update_model extends CI_Model
         }
         return $message;
     }
+    
+    function get_categories()
+    {
+        $this->db->select('Category_Name');
+        $query = $this->db->get('categories');
+        
+        if($query->num_rows == 0) 
+        {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
 }
